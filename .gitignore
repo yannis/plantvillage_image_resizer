@@ -1,0 +1,7 @@
+.bundle
+.rbenv-version
+uploads*/
+__MACOSX
+bundle
+files_to_test
+plantimages*

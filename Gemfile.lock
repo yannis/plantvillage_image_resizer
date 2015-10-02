@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    byebug (6.0.2)
+    rmagick (2.15.4)
+    rubyzip (1.1.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  byebug
+  rmagick (= 2.15.4)
+  rubyzip (>= 1.0.0)
+
+BUNDLED WITH
+   1.10.6
