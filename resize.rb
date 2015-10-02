@@ -50,15 +50,16 @@ zipped_dirs.each do |zipped_dir|
   if unzip_file zipped_dir
     FileUtils.rm(zipped_dir)
   end
-  FileUtils.rmdir("./__MACOSX")
 end
+FileUtils.rm_r("__MACOSX", verbose: true)
+
 
 #list all plantimages dirs
 directories = Dir.entries('.').select {|entry| File.directory? File.join('.',entry) and !(entry =='.' || entry == '..')and entry.match(/plantimages/) }
 
 directories.each do |directory|
   images = Dir.entries(directory).select do |filename|
-    is_image?(filename)
+    is_image?(filename) && filename.match('_resized').nil?
   end
   images.each do |image|
     p "Resizing image: #{image}"
