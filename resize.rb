@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'zip'
-require 'RMagick'
+require 'rmagick'
 
 def is_image?(filename)
   !filename.downcase.match(/\.jpeg|\.jpg/).nil?
@@ -32,14 +32,9 @@ def two_step_resize(img, filename, max_x, max_y)
 
 end
 
-#spin the image before resizing
-def resize_with_rotate(img, output_filename, max_x, max_y)
-  res = img.rotate(90).resize_to_fit(max_y, max_x).rotate(-90)
-  res.write(output_filename){self.quality=100}
-end
-
 def unzip_file (file)
   destination = "."
+  p "Extracting: #{file}"
   Zip::File.open(file) do |zip_file|
     zip_file.each do |f|
       f_path = File.join(destination, f.name)
@@ -66,8 +61,9 @@ directories.each do |directory|
     is_image?(filename)
   end
   images.each do |image|
+    p "Resizing image: #{image}"
     image_fullpath = File.join(directory, image)
-    p "image_fullpath: #{image_fullpath}"
+    image_basename = File.basename(image)
     img = Magick::Image.read(image_fullpath).first
     new_image_filename = image_fullpath.gsub(image_basename, image_basename+"_resized")
     two_step_resize(img, new_image_filename , 600, 800)
