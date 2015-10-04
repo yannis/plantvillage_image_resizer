@@ -1,7 +1,12 @@
 .bundle
 .rbenv-version
+.rspec
 uploads*/
 __MACOSX
 bundle
 files_to_test
 plantimages*
+
+*.sublime-workspace
+*.sublime-project
+
